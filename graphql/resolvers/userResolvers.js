@@ -77,7 +77,7 @@ module.exports = {
 
 			const match = await bcrypt.compare(password, user.password);
 
-			console.log(match);
+			// console.log(match);
 
 			if (!match) {
 				throw new UserInputError("Invalid credentials", {

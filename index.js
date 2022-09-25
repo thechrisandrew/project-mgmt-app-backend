@@ -20,6 +20,7 @@ async function startServer() {
 	const apolloServer = new ApolloServer({
 		typeDefs,
 		resolvers,
+		context: ({ req }) => ({ req }),
 		settings: {
 			"editor.theme": "light",
 		},
