@@ -3,7 +3,8 @@ const checkAuth = require("../../utils/checkAuth");
 
 module.exports = {
 	Query: {
-		client: async (_, { id }) => {
+		client: async (_, { id }, context) => {
+			const user = checkAuth(context);
 			try {
 				const res = await Client.findById(id);
 				return res;
@@ -11,7 +12,8 @@ module.exports = {
 				throw new Error(err);
 			}
 		},
-		clients: async (_, { amount }) => {
+		clients: async (_, { amount }, context) => {
+			const user = checkAuth(context);
 			try {
 				const res = await Client.find().sort({ createdAt: -1 }).limit(amount);
 				return res;

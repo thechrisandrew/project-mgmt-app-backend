@@ -3,7 +3,8 @@ const checkAuth = require("../../utils/checkAuth");
 
 module.exports = {
 	Query: {
-		project: async (_, { id }) => {
+		project: async (_, { id }, context) => {
+			const user = checkAuth(context);
 			try {
 				const res = await Project.findById(id);
 				return res;
@@ -11,7 +12,8 @@ module.exports = {
 				throw new Error(err);
 			}
 		},
-		projects: async (_, { amount }) => {
+		projects: async (_, { amount }, context) => {
+			const user = checkAuth(context);
 			try {
 				const res = await Project.find().sort({ createdAt: -1 }).limit(amount);
 				return res;

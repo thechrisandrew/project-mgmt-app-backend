@@ -1,6 +1,16 @@
 const { gql } = require("apollo-server-express");
 
 module.exports = gql`
+	type RegisterResponse {
+		id: ID!
+		username: String!
+		email: String!
+		createdAt: String!
+	}
+	type LoginResponse {
+		id: ID!
+		token: String!
+	}
 	type User {
 		id: ID!
 		username: String!
@@ -65,8 +75,8 @@ module.exports = gql`
 		projects(amount: Int): [Project]
 	}
 	type Mutation {
-		register(registerInput: RegisterInput): User!
-		login(username: String!, password: String!): User!
+		register(registerInput: RegisterInput): RegisterResponse!
+		login(username: String!, password: String!): LoginResponse!
 
 		createClient(createClientInput: CreateClientInput): Client!
 		deleteClient(id: ID!): Client
